@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           Routes.splashScreen: (ctx) => SplashScreen(),
-          // Routes.catalogScreen: (ctx) => CatalogScreen(),
+          Routes.catalogScreen: (ctx) => CatalogScreen(),
           // Routes.petDetailScreen: (ctx) => PetDetailScreen(),
           // Routes.cartScreen: (ctx) => CartScreen(),
         },

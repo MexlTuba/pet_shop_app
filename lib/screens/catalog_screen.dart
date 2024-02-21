@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_shop_app/widgets/navbar.dart';
 import 'package:provider/provider.dart';
 import '../providers/pet_provider.dart';
 import '../widgets/pet_card.dart'; // Assuming you have a PetCard widget
@@ -67,11 +68,13 @@ class CatalogScreen extends StatelessWidget {
           ),
         ],
       ),
-      // Placeholder for the nav bar, to be replaced with the actual NavBar widget
-      bottomNavigationBar: Container(
-        color: Colors.grey[200],
-        height: 60,
-        child: Center(child: Text('NavBar placeholder')),
+      bottomNavigationBar: NavBar(
+        selectedIndex:
+            1, // Assuming 'Catalog' is the second item and currently selected
+        onItemSelected: (index) {
+          // Handle navigation based on the index of the selected item
+          // For example, you could use a switch statement to navigate to different screens
+        },
       ),
     );
   }

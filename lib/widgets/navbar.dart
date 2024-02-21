@@ -4,31 +4,44 @@ class NavBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onItemSelected;
 
-  const NavBar({
+  NavBar({
     Key? key,
-    required this.selectedIndex,
+    this.selectedIndex = 0,
     required this.onItemSelected,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
+      type: BottomNavigationBarType.fixed,
+      backgroundColor:
+          Colors.white, // Match the background color to your design
+      selectedItemColor:
+          Theme.of(context).colorScheme.secondary, // Your theme's accent color
+      unselectedItemColor: Colors.grey, // Your theme's unselected item color
+      selectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
+      unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
+      currentIndex: selectedIndex,
+      onTap: onItemSelected,
+      items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
           label: 'Home',
         ),
         BottomNavigationBarItem(
+          icon: Icon(
+              Icons.view_list), // Choose an icon that resembles your design
+          label: 'Catalog',
+        ),
+        BottomNavigationBarItem(
           icon: Icon(Icons.shopping_cart),
           label: 'Cart',
         ),
-        // Add more items for each tab if necessary
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'Profile',
+        ),
       ],
-      currentIndex: selectedIndex,
-      selectedItemColor: Theme.of(context)
-          .colorScheme
-          .secondary, // Use the secondary color from your theme
-      onTap: onItemSelected,
     );
   }
 }

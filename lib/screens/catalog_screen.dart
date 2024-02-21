@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_shop_app/screens/pet_detail_screen.dart';
 import 'package:pet_shop_app/widgets/navbar.dart';
 import 'package:provider/provider.dart';
 import '../providers/pet_provider.dart';
@@ -47,14 +48,18 @@ class CatalogScreen extends StatelessWidget {
               itemCount: pets.length,
               itemBuilder: (ctx, i) => GestureDetector(
                 onTap: () {
-                  // Navigate to the PetDetail screen with the selected pet
-                  Navigator.pushNamed(context, Routes.petDetailScreen,
-                      arguments: pets[i]);
+                  // Pass the current pet as an argument to the details screen.
+                  Navigator.pushNamed(
+                    context,
+                    Routes.petDetailScreen,
+                    arguments: pets[i],
+                  );
                 },
                 child: PetCard(
                   pet: pets[i],
                   onAddToCart: () {
-                    // TODO: Implement add to cart functionality
+                    // Implement add to cart functionality
+                    // Example: Provider.of<CartProvider>(context, listen: false).addToCart(pets[i]);
                   },
                 ),
               ),

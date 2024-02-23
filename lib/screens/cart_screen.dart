@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_shop_app/models/pet.dart';
 import 'package:pet_shop_app/utils/routes.dart';
 import 'package:provider/provider.dart';
 import '../providers/cart_provider.dart';
@@ -9,6 +10,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // This would be your CartProvider where you get the cart items and total
     final cartProvider = Provider.of<CartProvider>(context);
+    final petsInCart = cartProvider.items.values.toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -31,19 +33,26 @@ class CartScreen extends StatelessWidget {
                 Expanded(
                   child: ListView.builder(
                     itemCount: cartProvider.items.length,
-                    itemBuilder: (ctx, i) => ListTile(
-                      leading: Image.asset(
-                          cartProvider.items.values.toList()[i].imageUrl),
-                      title: Text(cartProvider.items.values.toList()[i].name),
-                      subtitle: Text(
-                          '\$${cartProvider.items.values.toList()[i].price}'),
-                      trailing: IconButton(
-                        icon: Icon(Icons.remove_shopping_cart),
-                        onPressed: () {
-                          // TODO: Implement remove from cart functionality
-                        },
-                      ),
-                    ),
+                    itemBuilder: (ctx, i) {
+                      Pet pet = petsInCart[i];
+                      return ListTile(
+                        leading: Image.asset(pet.imageUrl),
+                        title: Text(pet.name),
+                        subtitle: Text('\$${pet.price}'),
+                        trailing: IconButton(
+                          icon: Icon(Icons.remove_shopping_cart),
+                          onPressed: () {
+                            cartProvider.removeFromCart(pet.id);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('${pet.name} removed from cart!'),
+                                duration: Duration(seconds: 1),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
                   ),
                 ),
                 Card(

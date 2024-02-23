@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:pet_shop_app/utils/routes.dart';
 import 'package:provider/provider.dart';
@@ -38,19 +36,18 @@ class PetDetailScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            flex: 3,
-            child: Image.asset(
-              pet.imageUrl,
-              fit: BoxFit.cover,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            AspectRatio(
+              aspectRatio: 3 / 2,
+              child: Image.asset(
+                pet.imageUrl,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
+            Container(
               padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,6 +59,7 @@ class PetDetailScreen extends StatelessWidget {
                         .headlineSmall
                         ?.copyWith(color: Colors.black),
                   ),
+                  SizedBox(height: 8),
                   Text(
                     '${pet.location} · ${pet.distance}',
                     style: Theme.of(context).textTheme.titleMedium,
@@ -71,9 +69,10 @@ class PetDetailScreen extends StatelessWidget {
                     'About ${pet.breed}',
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
-                  SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  SizedBox(height: 16),
+                  Wrap(
+                    spacing: 8, // Horizontal space between chips
+                    runSpacing: 8, // Vertical space between chips
                     children: [
                       _InfoChip(label: 'Weight', value: '${pet.weight} kg'),
                       _InfoChip(label: 'Height', value: '${pet.height} cm'),
@@ -84,24 +83,19 @@ class PetDetailScreen extends StatelessWidget {
                   Center(
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        // Access your CartProvider and call the method to add the pet to the cart
                         Provider.of<CartProvider>(context, listen: false)
                             .addToCart(pet);
-
-                        // Show a confirmation message
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text('${pet.name} added to cart!'),
-                            duration: Duration(seconds: 1),
+                            duration: Duration(seconds: 2),
                           ),
                         );
                       },
                       icon: Icon(Icons.add_shopping_cart, size: 24),
                       label: Text('Add to Cart'),
                       style: ElevatedButton.styleFrom(
-                        primary: Theme.of(context)
-                            .colorScheme
-                            .secondary, // Use the accent color from your theme
+                        primary: Theme.of(context).colorScheme.secondary,
                         padding:
                             EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                       ),
@@ -110,14 +104,16 @@ class PetDetailScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: NavBar(
-        selectedIndex: 1,
+        selectedIndex: 1, // Assuming 'Catalog' is the second item
         onItemSelected: (index) {
           if (index == 1) {
+            // Catalog is already selected, do nothing
           } else if (index == 2) {
+            // Navigate to the Cart screen
             Navigator.pushNamed(context, Routes.cartScreen);
           }
         },
@@ -132,12 +128,7 @@ class PetDetailScreen extends StatelessWidget {
         backgroundColor: Colors.green[200],
         child: Text(label[0].toUpperCase()),
       ),
-      label: Text(
-        '$label: $value',
-        style: TextStyle(
-          color: Colors.black,
-        ),
-      ),
+      label: Text('$label: $value', style: TextStyle(color: Colors.black)),
       backgroundColor: Colors.green[50],
       elevation: 4.0,
       shadowColor: Colors.grey[50],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_shop_app/utils/routes.dart';
 import 'package:provider/provider.dart';
 import '../models/pet.dart';
-import '../widgets/navbar.dart'; // Make sure to import your NavBar widget
+import '../widgets/navbar.dart';
 import 'package:pet_shop_app/providers/cart_provider.dart';
 
 class PetDetailScreen extends StatelessWidget {
@@ -17,7 +17,6 @@ class PetDetailScreen extends StatelessWidget {
       color: Colors.grey[800],
     );
 
-    // Define the text style for the pet attribute values
     TextStyle attributeValueStyle = TextStyle(
       fontWeight: FontWeight.bold,
       color: Theme.of(context).colorScheme.secondary,
@@ -54,8 +53,7 @@ class PetDetailScreen extends StatelessWidget {
             Image.asset(
               pet.imageUrl,
               fit: BoxFit.cover,
-              height: MediaQuery.of(context).size.height *
-                  0.4, // Image takes 40% of screen height
+              height: MediaQuery.of(context).size.height * 0.4,
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),

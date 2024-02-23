@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_shop_app/providers/cart_provider.dart';
 import 'package:pet_shop_app/screens/pet_detail_screen.dart';
 import 'package:pet_shop_app/widgets/navbar.dart';
 import 'package:provider/provider.dart';
@@ -58,8 +59,16 @@ class CatalogScreen extends StatelessWidget {
                 child: PetCard(
                   pet: pets[i],
                   onAddToCart: () {
-                    // Implement add to cart functionality
-                    // Example: Provider.of<CartProvider>(context, listen: false).addToCart(pets[i]);
+                    // Add the pet to the cart
+                    Provider.of<CartProvider>(context, listen: false)
+                        .addToCart(pets[i]);
+                    // Optionally, show a snackbar or some other confirmation
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('${pets[i].name} added to cart!'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
                   },
                 ),
               ),

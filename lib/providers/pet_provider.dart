@@ -24,7 +24,7 @@ class PetProvider with ChangeNotifier {
         location: 'Tambuli',
         distance: '50km',
         weight: 30.5,
-        height: 200,
+        height: 20,
         color: 'Red',
         imageUrl: 'assets/images/Sphinx.png'),
     Pet(
@@ -35,7 +35,7 @@ class PetProvider with ChangeNotifier {
         location: 'Valenzuela',
         distance: '599km',
         weight: 33.5,
-        height: 2890,
+        height: 28,
         color: 'Orange',
         imageUrl: 'assets/images/Bengal.png'),
     Pet(
@@ -46,7 +46,7 @@ class PetProvider with ChangeNotifier {
         location: 'Queens',
         distance: '555km',
         weight: 344.5,
-        height: 203,
+        height: 23,
         color: 'Yellow',
         imageUrl: 'assets/images/Abyssinian.png'),
     Pet(
@@ -57,7 +57,7 @@ class PetProvider with ChangeNotifier {
         location: 'Zapatera',
         distance: '55km',
         weight: 31.5,
-        height: 860,
+        height: 60,
         color: 'Green',
         imageUrl: 'assets/images/Burmese.png'),
     Pet(
@@ -68,7 +68,7 @@ class PetProvider with ChangeNotifier {
         location: 'Escario',
         distance: '15km',
         weight: 43.5,
-        height: 210,
+        height: 10,
         color: 'Blue',
         imageUrl: 'assets/images/Russian.png'),
   ];

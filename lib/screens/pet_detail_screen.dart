@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pet_shop_app/utils/routes.dart';
+import 'package:provider/provider.dart';
 import '../models/pet.dart';
-import '../widgets/navbar.dart'; // Make sure to import your NavBar widget
+import '../widgets/navbar.dart';
+import 'package:pet_shop_app/providers/cart_provider.dart';
 
 class PetDetailScreen extends StatelessWidget {
   final Pet pet;
@@ -80,8 +82,16 @@ class PetDetailScreen extends StatelessWidget {
                     child: ElevatedButton.icon(
                       onPressed: () {
                         // Access your CartProvider and call the method to add the pet to the cart
-                        // For example:
-                        // Provider.of<CartProvider>(context, listen: false).addPetToCart(pet);
+                        Provider.of<CartProvider>(context, listen: false)
+                            .addToCart(pet);
+
+                        // Show a confirmation message
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('${pet.name} added to cart!'),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
                       },
                       icon: Icon(Icons.add_shopping_cart, size: 24),
                       label: Text('Add to Cart'),

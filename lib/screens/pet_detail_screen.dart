@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pet_shop_app/utils/routes.dart';
 import 'package:provider/provider.dart';
 import '../models/pet.dart';
-import '../widgets/navbar.dart';
+import '../widgets/navbar.dart'; // Make sure to import your NavBar widget
 import 'package:pet_shop_app/providers/cart_provider.dart';
 
 class PetDetailScreen extends StatelessWidget {
@@ -12,6 +12,17 @@ class PetDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextStyle attributeLabelStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      color: Colors.grey[800],
+    );
+
+    // Define the text style for the pet attribute values
+    TextStyle attributeValueStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      color: Theme.of(context).colorScheme.secondary,
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -40,51 +51,72 @@ class PetDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            AspectRatio(
-              aspectRatio: 3 / 2,
-              child: Image.asset(
-                pet.imageUrl,
-                fit: BoxFit.cover,
-              ),
+            Image.asset(
+              pet.imageUrl,
+              fit: BoxFit.cover,
+              height: MediaQuery.of(context).size.height *
+                  0.4, // Image takes 40% of screen height
             ),
-            Container(
-              padding: EdgeInsets.all(16.0),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     pet.name,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall
-                        ?.copyWith(color: Colors.black),
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
                   ),
-                  SizedBox(height: 8),
                   Text(
                     '${pet.location} · ${pet.distance}',
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey[600],
+                    ),
                   ),
                   SizedBox(height: 16),
                   Text(
                     'About ${pet.breed}',
-                    style: Theme.of(context).textTheme.titleSmall,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
                   ),
                   SizedBox(height: 16),
-                  Wrap(
-                    spacing: 8, // Horizontal space between chips
-                    runSpacing: 8, // Vertical space between chips
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      _InfoChip(label: 'Weight', value: '${pet.weight} kg'),
-                      _InfoChip(label: 'Height', value: '${pet.height} cm'),
-                      _InfoChip(label: 'Color', value: pet.color),
+                      _AttributeCard(
+                        attribute: 'Weight',
+                        value: '${pet.weight} kg',
+                        labelStyle: attributeLabelStyle,
+                        valueStyle: attributeValueStyle,
+                      ),
+                      _AttributeCard(
+                        attribute: 'Height',
+                        value: '${pet.height} cm',
+                        labelStyle: attributeLabelStyle,
+                        valueStyle: attributeValueStyle,
+                      ),
+                      _AttributeCard(
+                        attribute: 'Color',
+                        value: pet.color,
+                        labelStyle: attributeLabelStyle,
+                        valueStyle: attributeValueStyle,
+                      ),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: 24),
                   Center(
                     child: ElevatedButton.icon(
                       onPressed: () {
                         Provider.of<CartProvider>(context, listen: false)
                             .addToCart(pet);
+
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text('${pet.name} added to cart!'),
@@ -108,12 +140,10 @@ class PetDetailScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: NavBar(
-        selectedIndex: 1, // Assuming 'Catalog' is the second item
+        selectedIndex: 1,
         onItemSelected: (index) {
           if (index == 1) {
-            // Catalog is already selected, do nothing
           } else if (index == 2) {
-            // Navigate to the Cart screen
             Navigator.pushNamed(context, Routes.cartScreen);
           }
         },
@@ -121,18 +151,19 @@ class PetDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _InfoChip({required String label, required String value}) {
-    return Chip(
-      labelPadding: EdgeInsets.all(2.0),
-      avatar: CircleAvatar(
-        backgroundColor: Colors.green[200],
-        child: Text(label[0].toUpperCase()),
+  Widget _AttributeCard(
+      {required String attribute,
+      required String value,
+      required TextStyle labelStyle,
+      required TextStyle valueStyle}) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Text(attribute, style: labelStyle),
+          Text(value, style: valueStyle),
+        ],
       ),
-      label: Text('$label: $value', style: TextStyle(color: Colors.black)),
-      backgroundColor: Colors.green[50],
-      elevation: 4.0,
-      shadowColor: Colors.grey[50],
-      padding: EdgeInsets.all(8.0),
     );
   }
 }

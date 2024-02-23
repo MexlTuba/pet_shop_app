@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:pet_shop_app/utils/routes.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +15,7 @@ class PetDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -56,17 +59,17 @@ class PetDetailScreen extends StatelessWidget {
                     pet.name,
                     style: Theme.of(context)
                         .textTheme
-                        .headline5
+                        .headlineSmall
                         ?.copyWith(color: Colors.black),
                   ),
                   Text(
                     '${pet.location} · ${pet.distance}',
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                   SizedBox(height: 16),
                   Text(
                     'About ${pet.breed}',
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                   SizedBox(height: 8),
                   Row(
@@ -111,15 +114,12 @@ class PetDetailScreen extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: NavBar(
-        selectedIndex: 1, // Assuming 'Catalog' is the second item
+        selectedIndex: 1,
         onItemSelected: (index) {
           if (index == 1) {
-            // Catalog is already selected, do nothing
           } else if (index == 2) {
-            // Navigate to the Cart screen
             Navigator.pushNamed(context, Routes.cartScreen);
           }
-          // Implement navigation logic for other indices if needed
         },
       ),
     );

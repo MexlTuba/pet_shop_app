@@ -15,6 +15,7 @@ class CatalogScreen extends StatelessWidget {
     final pets = petData.pets;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Store',
             style: TextStyle(
@@ -49,7 +50,6 @@ class CatalogScreen extends StatelessWidget {
               itemCount: pets.length,
               itemBuilder: (ctx, i) => GestureDetector(
                 onTap: () {
-                  // Pass the current pet as an argument to the details screen.
                   Navigator.pushNamed(
                     context,
                     Routes.petDetailScreen,
@@ -59,10 +59,8 @@ class CatalogScreen extends StatelessWidget {
                 child: PetCard(
                   pet: pets[i],
                   onAddToCart: () {
-                    // Add the pet to the cart
                     Provider.of<CartProvider>(context, listen: false)
                         .addToCart(pets[i]);
-                    // Optionally, show a snackbar or some other confirmation
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text('${pets[i].name} added to cart!'),
@@ -83,15 +81,12 @@ class CatalogScreen extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: NavBar(
-        selectedIndex: 1, // Assuming 'Catalog' is the second item
+        selectedIndex: 1,
         onItemSelected: (index) {
           if (index == 1) {
-            // Catalog is already selected, do nothing
           } else if (index == 2) {
-            // Navigate to the Cart screen
             Navigator.pushNamed(context, Routes.cartScreen);
           }
-          // Implement navigation logic for other indices if needed
         },
       ),
     );

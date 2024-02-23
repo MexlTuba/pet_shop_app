@@ -8,12 +8,9 @@ class Cart with ChangeNotifier {
 
   void addItem(Pet pet) {
     if (_items.containsKey(pet.id)) {
-      // If the item already exists, you might increase the quantity or handle accordingly
     } else {
       _items.putIfAbsent(pet.id, () => pet);
     }
     notifyListeners();
   }
-
-  // Additional cart functionality...
 }

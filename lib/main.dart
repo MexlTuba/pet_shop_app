@@ -8,7 +8,7 @@ import 'theme.dart';
 import 'screens/splash_screen.dart';
 import 'screens/catalog_screen.dart';
 import 'screens/pet_detail_screen.dart';
-import 'screens/cart_screen.dart'; // Import the screens
+import 'screens/cart_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,15 +39,8 @@ class MyApp extends StatelessWidget {
                 );
               case Routes.cartScreen:
                 return MaterialPageRoute(builder: (_) => CartScreen());
-              // Define other routes as needed
             }
           },
-          // You can comment out or remove the direct routes map if using onGenerateRoute
-          // routes: {
-          //   Routes.splashScreen: (ctx) => SplashScreen(),
-          //   Routes.catalogScreen: (ctx) => CatalogScreen(),
-          //   // Other routes...
-          // },
         ));
   }
 }

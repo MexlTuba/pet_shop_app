@@ -17,11 +17,8 @@ final ThemeData appTheme = ThemeData(
     bodyLarge: TextStyle(
         fontSize: 17.51, fontFamily: 'Poppins', color: Color(0xFFA1A1A1)),
     labelLarge: TextStyle(
-        fontSize: 17.51,
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Inter'), // Style for buttons
+        fontSize: 17.51, fontWeight: FontWeight.bold, fontFamily: 'Inter'),
   ),
-  // Define other theme attributes if needed
 );
 
 const Color primaryColor = Color(0xFFFDBE3B);

@@ -24,7 +24,6 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // Implement a method to remove an item from the cart
   void removeFromCart(String petId) {
     _items.remove(petId);
     notifyListeners();

@@ -8,11 +8,11 @@ import '../widgets/navbar.dart';
 class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // This would be your CartProvider where you get the cart items and total
     final cartProvider = Provider.of<CartProvider>(context);
     final petsInCart = cartProvider.items.values.toList();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Cart',
             style: TextStyle(
@@ -92,15 +92,11 @@ class CartScreen extends StatelessWidget {
               ],
             ),
       bottomNavigationBar: NavBar(
-        selectedIndex: 2, // Assuming 'Cart' is the third item
+        selectedIndex: 2,
         onItemSelected: (index) {
           if (index == 1) {
-            // Navigate back to the Catalog screen
             Navigator.pushNamed(context, Routes.catalogScreen);
-          } else if (index == 2) {
-            // Cart is already selected, do nothing
-          }
-          // Implement navigation logic for other indices if needed
+          } else if (index == 2) {}
         },
       ),
     );

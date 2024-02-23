@@ -37,6 +37,8 @@ class MyApp extends StatelessWidget {
                 return MaterialPageRoute(
                   builder: (_) => PetDetailScreen(pet: pet),
                 );
+              case Routes.cartScreen:
+                return MaterialPageRoute(builder: (_) => CartScreen());
               // Define other routes as needed
             }
           },

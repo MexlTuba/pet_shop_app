@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_shop_app/utils/routes.dart';
 import '../models/pet.dart';
 import '../widgets/navbar.dart'; // Make sure to import your NavBar widget
 
@@ -100,9 +101,15 @@ class PetDetailScreen extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: NavBar(
-        selectedIndex: 1, // Update based on the screen's index
+        selectedIndex: 1, // Assuming 'Catalog' is the second item
         onItemSelected: (index) {
-          // Handle navigation based on the selected item index
+          if (index == 1) {
+            // Catalog is already selected, do nothing
+          } else if (index == 2) {
+            // Navigate to the Cart screen
+            Navigator.pushNamed(context, Routes.cartScreen);
+          }
+          // Implement navigation logic for other indices if needed
         },
       ),
     );

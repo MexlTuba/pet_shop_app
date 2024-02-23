@@ -74,11 +74,15 @@ class CatalogScreen extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: NavBar(
-        selectedIndex:
-            1, // Assuming 'Catalog' is the second item and currently selected
+        selectedIndex: 1, // Assuming 'Catalog' is the second item
         onItemSelected: (index) {
-          // Handle navigation based on the index of the selected item
-          // For example, you could use a switch statement to navigate to different screens
+          if (index == 1) {
+            // Catalog is already selected, do nothing
+          } else if (index == 2) {
+            // Navigate to the Cart screen
+            Navigator.pushNamed(context, Routes.cartScreen);
+          }
+          // Implement navigation logic for other indices if needed
         },
       ),
     );
